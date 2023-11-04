@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 class UserData extends ChangeNotifier {
-  String name = '';
-  String email = '';
+  List<Map<String, String>> entries = [];
 
-  void updateUserData(String name, String email) {
-    this.name = name;
-    this.email = email;
+  void addEntry(String name, String email) {
+    entries.add({'name': name, 'email': email});
     notifyListeners();
   }
-  void clearUserData() {
-    name = '';
-    email = '';
+
+  void clearEntries() {
+    entries.clear();
     notifyListeners();
   }
 }

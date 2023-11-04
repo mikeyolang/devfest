@@ -22,41 +22,56 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text('Efficient State Management in Flutter'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Efficient State Management Using Provider",
-              style: TextStyle(
-                fontSize: 30,
-              ),
+              'Welcome to the World of Flutter!',
+              style: TextStyle(fontSize: 24),
             ),
+            if (userData.entries.isNotEmpty)
+              Column(
+                children: userData.entries.map((entry) {
+                  return Padding(
+                    padding: EdgeInsets.all(padding),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Name: ${entry['name']}',
+                          style: TextStyle(fontSize: fontSize),
+                        ),
+                        Text(
+                          'Email: ${entry['email']}',
+                          style: TextStyle(fontSize: fontSize),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Name: ${userData.name}',
-                style: TextStyle(fontSize: fontSize),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FormScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Fill Your Data'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Email: ${userData.email}',
-                style: TextStyle(fontSize: fontSize),
-              ),
-            ),
+            SizedBox(height: padding),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FormScreen()));
+                userData.clearEntries();
               },
-              child: Padding(
-                padding: EdgeInsets.all(padding),
-                child: const Text('Go to Form'),
-              ),
+              child: const Text('Clear Data'),
             ),
           ],
         ),
